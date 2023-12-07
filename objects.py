@@ -34,11 +34,11 @@ def read_file(file):
         for line in f:
             if line.startswith('v '):
                 verts.append([float(i) for i in line.split()[1:]])
-                print('Vertex ', line)
+
             elif line.startswith('f '):
                 faces_ = line.split()[1:]
                 faces.append([int(face_.split('/')[0]) for face_ in faces_])
-                print('Face ', line)
+
     return verts, faces
 
 #Function that converts lists to numpy arrays
@@ -60,16 +60,14 @@ class Object3D():
         self.faces = faces
 
     def rotate_x(self, angle):
-        x = self.verts @ mats.rot_matrix_x(angle)
-        y = self.faces @ mats.rot_matrix_x(angle)
-        return x, y
+        self.verts = self.verts @ mats.rot_matrix_x(angle)
+        self.faces = self.faces @ mats.rot_matrix_x(angle)
 
     def rotate_y(self, angle):
-        x = self.verts @ mats.rot_matrix_y(angle)
-        y = self.faces @ mats.rot_matrix_y(angle)
-        return x, y
+        self.verts = self.verts @ mats.rot_matrix_y(angle)
+        self.faces = self.faces @ mats.rot_matrix_y(angle)
+
 
     def rotate_z(self, angle):
-        x = self.verts @ mats.rot_matrix_z(angle)
-        y = self.faces @ mats.rot_matrix_z(angle)
-        return x, y
+        self.verts = self.verts @ mats.rot_matrix_z(angle)
+        self.faces = self.faces @ mats.rot_matrix_z(angle)
