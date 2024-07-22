@@ -14,10 +14,9 @@ import io
 mpl.use('TkAgg')
 
 
-
-verts, faces = objects.read_file('../lowpoly.obj')
+#Loading file and creating object
+verts, faces = objects.read_file('lowpoly.obj')
 verts, faces = objects.convert(verts, faces)
-
 cube = objects.Object3D("cube", verts, faces)
 
 
@@ -46,12 +45,17 @@ def update(a, verts, faces):
     poly = Poly3DCollection(cube.faces, alpha=0.5, facecolors='green')
     ax.add_collection3d(poly)
 
+
+
+
         #ax.scatter(x, y, z, color='red')
 
         #img_buf = io.BytesIO()
             #plt.savefig(f'images/{a}', dpi=100, format='png')
         #im = Image.open(img_buf)
         #im.show(title="My Image")
+        
+   
 line_ani = animation.FuncAnimation(fig, update, a, fargs=(cube.verts, cube.faces),
                                    interval=1, blit=False)
 

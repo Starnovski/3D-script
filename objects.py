@@ -44,7 +44,7 @@ def read_file(file):
 #Function that converts lists to numpy arrays
 def convert(verts, faces):
     verts = np.array(verts)
-    #That loop swaps vertices numbers with their coordinates
+    #That loop swaps verts numbers with their coordinates
     for i in range(0, len(faces)):
         for a in range(0,4):
             b = faces[i][a]
@@ -59,6 +59,7 @@ class Object3D():
         self.verts = verts
         self.faces = faces
 
+#Self rotation functions
     def rotate_x(self, angle):
         self.verts = self.verts @ mats.rot_matrix_x(angle)
         self.faces = self.faces @ mats.rot_matrix_x(angle)
